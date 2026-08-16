@@ -1,0 +1,44 @@
+==========================================================================
+  ELIGIBLE JOBS — 2026-08-16 09:47:58
+  Candidate: Rugved Rajesh Chandekar | B.Tech IT 2026 | Entry Level India
+  Total Eligible: 5
+==========================================================================
+
+#001 | [Amazon] Applied Scientist, Amazon Music - Catalog Quality  (Match: 100%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10486425/applied-scientist-amazon-music-catalog-quality
+  Quals    : - Experience programming in Java, C++, Python or related language - Bachelor's degree or above in Engineering, Computer Science, Machine Learning, Operations Research, Statistics, or related fields - Experience building machine learning models or developing algorithms for business application - Expe
+--------------------------------------------------------------------------
+#002 | [Sarvam AI] Machine Learning Engineer, Vision  (Match: 97%)
+  Source   : Ashby
+  Location : Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://jobs.ashbyhq.com/sarvam/282019f4-f86b-4fe0-a643-bbac0cd8a751
+  Quals    : About Sarvam Sarvam is building the bedrock of Sovereign AI for India. The company is developing India's full-stack sovereign AI platform, building across research, models, infrastructure and applications with a singular focus on making AI genuinely work for India. Sarvam works with leading enterpri
+--------------------------------------------------------------------------
+#003 | [PhonePe] Service Delivery Engineer  (Match: 82%)
+  Source   : Greenhouse
+  Location : Bangalore
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://job-boards.greenhouse.io/phonepe/jobs/7766920003
+  Quals    : <div class="content-intro"><p><strong>About PhonePe Limited:</strong></p>
+<p>Headquartered in India, its flagship product, the PhonePe digital payments app, was launched in Aug 2016. As of April 2025, PhonePe has over 60 Crore (600 Million) registered users and a digital payments acceptance network 
+--------------------------------------------------------------------------
+#004 | [Pure Storage] Associate System Engineer, SE Excellence Center - ANZ  (Match: 82%)
+  Source   : Greenhouse
+  Location : Bangalore, India
+  Exp      : 4.0+ years preferred only — 0 years minimum required
+  URL      : https://job-boards.greenhouse.io/purestorage/jobs/7953513
+  Quals    : <div class="content-intro"><p>We’re in an unbelievably exciting area of tech and are fundamentally reshaping the data storage industry. Here, you lead with innovative thinking, grow along with us, and join the smartest team in the industry.</p>
+<p>This type of work—work that changes the world—is wha
+--------------------------------------------------------------------------
+#005 | [Pure Storage] Cloud Native Technical Services Engineer  (Match: 82%)
+  Source   : Greenhouse
+  Location : Bangalore, India
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://job-boards.greenhouse.io/purestorage/jobs/8108379
+  Quals    : <div class="content-intro"><p>We’re in an unbelievably exciting area of tech and are fundamentally reshaping the data storage industry. Here, you lead with innovative thinking, grow along with us, and join the smartest team in the industry.</p>
+<p>This type of work—work that changes the world—is wha
+--------------------------------------------------------------------------

@@ -1,0 +1,22 @@
+{
+  "name": "Candidate Profile",
+  "graduation_year": 2026,
+  "full_time_experience_months": 2,
+  "internship_experience_months": 8,
+  "target_locations": ["India", "Bengaluru", "Bangalore", "Hyderabad", "Pune", "Gurugram", "Noida", "Mumbai", "Remote"],
+  "target_company_types": ["PRODUCT"],
+  "target_roles": [
+    "Software Engineer", "Software Development Engineer", "SDE",
+    "Backend Engineer", "Python Developer", "AI Engineer",
+    "ML Engineer", "Machine Learning Engineer", "Data Engineer",
+    "Data Scientist", "SRE", "Site Reliability Engineer",
+    "DevOps Engineer", "Cloud Engineer", "Platform Engineer",
+    "Systems Engineer", "Applied Scientist", "Forward Deployed Engineer"
+  ],
+  "skills": [
+    "Python", "Java", "C++", "SQL", "FastAPI", "Django", "Flask",
+    "AWS", "Azure", "Docker", "Kubernetes", "Linux", "Unix",
+    "Machine Learning", "Deep Learning", "LLM", "RAG", "LangChain",
+    "PyTorch", "TensorFlow", "Pandas", "NumPy", "Git", "REST API"
+  ]
+}
