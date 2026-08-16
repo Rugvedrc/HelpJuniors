@@ -39,11 +39,11 @@ def get_telegram_token() -> str:
 
 
 def get_reply_keyboard() -> dict:
-    """Persistent custom keyboard buttons that overlay Telegram's chat typing area."""
+    """Persistent custom keyboard buttons (No typing needed)."""
     return {
         "keyboard": [
             [{"text": "🔍 New / Unread Jobs"}, {"text": "📋 All Eligible Jobs"}],
-            [{"text": "✅ Mark All as Read"}, {"text": "🔄 Run Discovery Sync"}]
+            [{"text": "✅ Mark All as Read"}]
         ],
         "resize_keyboard": True,
         "is_persistent": True
@@ -51,12 +51,12 @@ def get_reply_keyboard() -> dict:
 
 
 def format_jobs_message(df: pd.DataFrame, title_suffix: str = "") -> str:
-    """Format ALL eligible jobs from dataframe into a single clean Telegram Markdown message (No limit)."""
+    """Format ALL eligible jobs from dataframe into a single clean Telegram Markdown message."""
     if df.empty:
         return (
             "🎯 *PERSONAL JOB-DISCOVERY AGENT*\n\n"
-            "✨ *You're all caught up!* 0 unread eligible jobs.\n\n"
-            "_Tap '📋 All Eligible Jobs' below to review previously seen listings, or '🔄 Run Discovery Sync' to check for fresh postings._"
+            "✨ *You're all caught up!* 0 new unread eligible jobs.\n\n"
+            "_Tap '📋 All Eligible Jobs' below to review previously seen listings, or tap '✅ Mark All as Read' to reset status._"
         )
 
     lines = [
@@ -129,24 +129,15 @@ def handle_update(token: str, update: dict):
             )
             send_message(token, chat_id, msg)
 
-        elif "sync" in text_lower or "run" in text_lower:
-            send_message(token, chat_id, "🔄 *Executing Multi-Source Discovery Sync...* Please wait ~15 seconds.")
-            try:
-                from pipeline.runner import run_job_discovery_pipeline
-                run_job_discovery_pipeline()
-                unread_df = get_unread_eligible_jobs(chat_id)
-                msg = format_jobs_message(unread_df, title_suffix="Fresh Unread Jobs")
-                send_message(token, chat_id, msg)
-            except Exception as sync_err:
-                send_message(token, chat_id, f"⚠️ Sync error: {sync_err}")
-
-        elif "all" in text_lower:
+        elif "all" in text_lower and "unread" not in text_lower and "new" not in text_lower:
+            # "📋 All Eligible Jobs": Returns all eligible jobs in DB regardless of read status
             all_df = get_eligible_jobs_from_db()
             response_text = format_jobs_message(all_df, title_suffix="All Eligible Jobs")
             send_message(token, chat_id, response_text)
 
         else:
-            # Default for "hi", "hello", "/start", "/jobs", or "New / Unread Jobs"
+            # Default for "hi", "hello", "/start", "/jobs", or "🔍 New / Unread Jobs":
+            # Auto-fetches unread matching jobs
             unread_df = get_unread_eligible_jobs(chat_id)
             if unread_df.empty:
                 all_df = get_eligible_jobs_from_db()
@@ -154,7 +145,7 @@ def handle_update(token: str, update: dict):
             else:
                 response_text = format_jobs_message(unread_df, title_suffix="Unread Matching Jobs")
 
-            # Send EXACTLY ONE message containing all eligible jobs & predefined keyboard
+            # Send EXACTLY ONE message containing matching jobs & predefined keyboard
             send_message(token, chat_id, response_text)
 
     # Handle inline button callbacks if any
@@ -189,7 +180,7 @@ def run_telegram_bot_polling(token: str = None):
         print("❌ Error: TELEGRAM_BOT_TOKEN not provided.")
         return
 
-    print("🤖 Telegram Bot Listener Started with Single Message & Persistent Predefined Keyboard...")
+    print("🤖 Telegram Bot Listener Started with Clean Keyboard & Read/Unread Logic...")
     last_update_id = 0
 
     while True:
