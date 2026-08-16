@@ -148,7 +148,7 @@ def render_admin_dashboard():
             st.rerun()
 
     st.markdown(f"**Eligible Jobs ({len(eligible_df)}):**")
-    st.dataframe(eligible_df[["company", "title", "location", "experience_text", "canonical_url"]], width=None)
+    st.dataframe(eligible_df[["company", "title", "location", "experience_text", "canonical_url"]], use_container_width=True)
 
 
 if __name__ == "__main__":
