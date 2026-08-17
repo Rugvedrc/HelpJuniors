@@ -11,13 +11,15 @@ from sources.searxng import SearXNGAdapter
 from sources.google import GoogleAdapter
 from sources.microsoft import MicrosoftAdapter
 from sources.goldman import FinanceTechAdapter
+from sources.fresher_aggregator import FresherAggregatorAdapter
 
 
 class SourceManager:
     """
     Manager orchestrating job discovery across official company career portals
     (Amazon, Google, Microsoft, Goldman Sachs, JP Morgan, Morgan Stanley,
-    Workday-hosted Enterprise portals, ATS boards: Greenhouse, Lever, Ashby)
+    Workday-hosted Enterprise portals, ATS boards: Greenhouse, Lever, Ashby),
+    Fresher Job Aggregators (Freshershunt, OffCampusJobs4u, Freshersnow),
     and SearXNG search fallback.
     """
     def __init__(self):
@@ -26,10 +28,11 @@ class SourceManager:
             GoogleAdapter(),           # Google Careers Official API
             MicrosoftAdapter(),        # Microsoft Careers Official API
             FinanceTechAdapter(),      # Goldman Sachs, JP Morgan, Morgan Stanley via SmartRecruiters
-            WorkdayAdapter(),          # Workday Enterprise Career Portals (Adobe, Nvidia, Flipkart, etc.)
+            WorkdayAdapter(),          # Workday Enterprise Career Portals (Adobe, Nvidia, Flipkart, JioStar, etc.)
             GreenhouseAdapter(),       # ATS Board Provider
             LeverAdapter(),            # ATS Board Provider
             AshbyAdapter(),            # ATS Board Provider
+            FresherAggregatorAdapter(), # Freshershunt, OffCampusJobs4u, Freshersnow RSS feeds
             SearXNGAdapter(),          # Search Aggregator Backup (skips if unavailable)
         ]
 
