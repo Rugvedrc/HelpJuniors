@@ -1,4 +1,7 @@
 import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 from typing import List, Dict, Any
 from models.job import Job
 from sources.base import SourceAdapter
@@ -43,7 +46,7 @@ class MicrosoftAdapter(SourceAdapter):
                 "lc": "India"
             }
             try:
-                res = requests.get(url, params=params, headers=HEADERS, timeout=12)
+                res = requests.get(url, params=params, headers=HEADERS, timeout=12, verify=False)
                 if res.status_code != 200:
                     break
                 data = res.json()

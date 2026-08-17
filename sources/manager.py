@@ -59,7 +59,7 @@ class SourceManager:
                     source_counts[source_name] = len(canonical)
 
                     if len(canonical) == 0 and attempt < 2:
-                        print(f"  ⚠️  [SourceManager] {source_name} returned 0 jobs (attempt {attempt+1}/3) — retrying in 3s...")
+                        print(f"  [WARN] [SourceManager] {source_name} returned 0 jobs (attempt {attempt+1}/3) - retrying in 3s...")
                         time.sleep(3)
                         continue  # Retry
 
@@ -71,6 +71,6 @@ class SourceManager:
                         time.sleep(3)
                     else:
                         source_counts[source_name] = 0
-                        print(f"  ❌ [SourceManager] {source_name} failed all 3 attempts — skipping.")
+                        print(f"  [FAIL] [SourceManager] {source_name} failed all 3 attempts - skipping.")
 
         return all_jobs, source_counts

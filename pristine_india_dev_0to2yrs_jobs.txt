@@ -1,24 +1,82 @@
 ==========================================================================
-  ELIGIBLE JOBS — 2026-08-16 09:47:58
+  ELIGIBLE JOBS — 2026-08-17 19:29:57
   Candidate: Rugved Rajesh Chandekar | B.Tech IT 2026 | Entry Level India
-  Total Eligible: 5
+  Total Eligible: 17
 ==========================================================================
 
-#001 | [Amazon] Applied Scientist, Amazon Music - Catalog Quality  (Match: 100%)
-  Source   : Amazon
-  Location : IN, KA, Bengaluru
-  Exp      : No experience requirement detected — assumed entry-level
-  URL      : https://www.amazon.jobs/en/jobs/10486425/applied-scientist-amazon-music-catalog-quality
-  Quals    : - Experience programming in Java, C++, Python or related language - Bachelor's degree or above in Engineering, Computer Science, Machine Learning, Operations Research, Statistics, or related fields - Experience building machine learning models or developing algorithms for business application - Expe
---------------------------------------------------------------------------
-#002 | [Sarvam AI] Machine Learning Engineer, Vision  (Match: 97%)
+#001 | [Sarvam AI] Machine Learning Engineer, Vision  (Match: 89%)
   Source   : Ashby
   Location : Bengaluru
   Exp      : No experience requirement detected — assumed entry-level
   URL      : https://jobs.ashbyhq.com/sarvam/282019f4-f86b-4fe0-a643-bbac0cd8a751
   Quals    : About Sarvam Sarvam is building the bedrock of Sovereign AI for India. The company is developing India's full-stack sovereign AI platform, building across research, models, infrastructure and applications with a singular focus on making AI genuinely work for India. Sarvam works with leading enterpri
 --------------------------------------------------------------------------
-#003 | [PhonePe] Service Delivery Engineer  (Match: 82%)
+#002 | [Amazon] SysDev I - Multimedia, Amazon Devices  (Match: 89%)
+  Source   : Amazon
+  Location : IN, TN, Chennai
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10501186/sysdev-i-multimedia-amazon-devices
+  Quals    : - Experience in automating, deploying, and supporting infrastructure - Experience programming with at least one modern language such as Python, Ruby, Golang, Java, C++, C#, Rust - Experience with Linux/Unix
+--------------------------------------------------------------------------
+#003 | [PhonePe] Site Reliability Engineer - 2  (Match: 86%)
+  Source   : Greenhouse
+  Location : Bangalore
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://job-boards.greenhouse.io/phonepe/jobs/7766868003
+  Quals    : <div class="content-intro"><p><strong>About PhonePe Limited:</strong></p>
+<p>Headquartered in India, its flagship product, the PhonePe digital payments app, was launched in Aug 2016. As of April 2025, PhonePe has over 60 Crore (600 Million) registered users and a digital payments acceptance network 
+--------------------------------------------------------------------------
+#004 | [Amazon] Applied Scientist I, Ads Trust  (Match: 86%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10475339/applied-scientist-i-ads-trust
+  Quals    : - Experience programming in Java, C++, Python or related language - Experience with SQL and an RDBMS (e.g., Oracle) or Data Warehouse - Experience building machine learning models or developing algorithms for business application - Experience researching about machine learning, deep learning, NLP, c
+--------------------------------------------------------------------------
+#005 | [Amazon] Applied Scientist, International Machine Learning  (Match: 82%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10458636/applied-scientist-international-machine-learning
+  Quals    : - Experience programming in Java, C++, Python or related language - Experience with SQL and an RDBMS (e.g., Oracle) or Data Warehouse
+--------------------------------------------------------------------------
+#006 | [Amazon] Applied Scientist, Amazon Music - Catalog Quality  (Match: 80%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10486425/applied-scientist-amazon-music-catalog-quality
+  Quals    : - Experience programming in Java, C++, Python or related language - Bachelor's degree or above in Engineering, Computer Science, Machine Learning, Operations Research, Statistics, or related fields - Experience building machine learning models or developing algorithms for business application - Expe
+--------------------------------------------------------------------------
+#007 | [Amazon] Applied Scientist I, Amazon Shipping  (Match: 78%)
+  Source   : Amazon
+  Location : IN, HR, Gurugram
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10438310/applied-scientist-i-amazon-shipping
+  Quals    : - Experience programming in Java, C++, Python or related language - Experience with SQL and an RDBMS (e.g., Oracle) or Data Warehouse
+--------------------------------------------------------------------------
+#008 | [Pure Storage] Cloud Native Technical Services Engineer  (Match: 74%)
+  Source   : Greenhouse
+  Location : Bangalore, India
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://job-boards.greenhouse.io/purestorage/jobs/8108379
+  Quals    : <div class="content-intro"><p>We’re in an unbelievably exciting area of tech and are fundamentally reshaping the data storage industry. Here, you lead with innovative thinking, grow along with us, and join the smartest team in the industry.</p>
+<p>This type of work—work that changes the world—is wha
+--------------------------------------------------------------------------
+#009 | [Amazon] RPA Engineer , AR Automation  (Match: 71%)
+  Source   : Amazon
+  Location : IN, TS, Hyderabad
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10484539/rpa-engineer-ar-automation
+  Quals    : - UiPath Certified Professional Developer certification - - UiPath Certified Professional Developer certification - - Experience programming with at least one software programming language, or experience in developing and deploying LLMs in production on GPUs, or other AI acceleration hardware - - Ha
+--------------------------------------------------------------------------
+#010 | [Amazon] System Development Engineer II, Multimedia  (Match: 71%)
+  Source   : Amazon
+  Location : IN, TN, Chennai
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10501187/system-development-engineer-ii-multimedia
+  Quals    : - Experience in automating, deploying, and supporting large-scale infrastructure - Experience programming with at least one modern language such as Python, Ruby, Golang, Java, C++, C#, Rust - Experience with Linux/Unix - Experience with CI/CD pipelines build processes
+--------------------------------------------------------------------------
+#011 | [PhonePe] Service Delivery Engineer  (Match: 68%)
   Source   : Greenhouse
   Location : Bangalore
   Exp      : No experience requirement detected — assumed entry-level
@@ -26,19 +84,45 @@
   Quals    : <div class="content-intro"><p><strong>About PhonePe Limited:</strong></p>
 <p>Headquartered in India, its flagship product, the PhonePe digital payments app, was launched in Aug 2016. As of April 2025, PhonePe has over 60 Crore (600 Million) registered users and a digital payments acceptance network 
 --------------------------------------------------------------------------
-#004 | [Pure Storage] Associate System Engineer, SE Excellence Center - ANZ  (Match: 82%)
-  Source   : Greenhouse
-  Location : Bangalore, India
-  Exp      : 4.0+ years preferred only — 0 years minimum required
-  URL      : https://job-boards.greenhouse.io/purestorage/jobs/7953513
-  Quals    : <div class="content-intro"><p>We’re in an unbelievably exciting area of tech and are fundamentally reshaping the data storage industry. Here, you lead with innovative thinking, grow along with us, and join the smartest team in the industry.</p>
-<p>This type of work—work that changes the world—is wha
---------------------------------------------------------------------------
-#005 | [Pure Storage] Cloud Native Technical Services Engineer  (Match: 82%)
-  Source   : Greenhouse
-  Location : Bangalore, India
+#012 | [Amazon] System Development Engineer, Emerging Device Software  (Match: 68%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
   Exp      : No experience requirement detected — assumed entry-level
-  URL      : https://job-boards.greenhouse.io/purestorage/jobs/8108379
-  Quals    : <div class="content-intro"><p>We’re in an unbelievably exciting area of tech and are fundamentally reshaping the data storage industry. Here, you lead with innovative thinking, grow along with us, and join the smartest team in the industry.</p>
-<p>This type of work—work that changes the world—is wha
+  URL      : https://www.amazon.jobs/en/jobs/10491945/system-development-engineer-emerging-device-software
+  Quals    : - Experience in automating, deploying, and supporting large-scale infrastructure - Experience programming with at least one modern language such as Python, Ruby, Golang, Java, C++, C#, Rust - Experience with Linux/Unix - Experience with CI/CD pipelines build processes
+--------------------------------------------------------------------------
+#013 | [Amazon] Salesforce Developer- II, Ads Tech  (Match: 60%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/3201699/salesforce-developer-ii-ads-tech
+  Quals    : - Experience in automating, deploying, and supporting large-scale infrastructure - Experience programming with at least one modern language such as Python, Ruby, Golang, Java, C++, C#, Rust
+--------------------------------------------------------------------------
+#014 | [Amazon] Systems Development Engineer, Selling Partner Solutions Storefront  (Match: 56%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10425388/systems-development-engineer-selling-partner-solutions-storefront
+  Quals    : - Experience in automating, deploying, and supporting infrastructure - Experience programming with at least one modern language such as Python, Ruby, Golang, Java, C++, C#, Rust - Knowledge of computer science fundamentals such as object-oriented design, operating systems, algorithms, data structure
+--------------------------------------------------------------------------
+#015 | [Amazon] System Development Engineer I, Partner Experience & Growth  (Match: 56%)
+  Source   : Amazon
+  Location : IN, KA, Bengaluru
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10466582/system-development-engineer-i-partner-experience-growth
+  Quals    : - Knowledge of at least one modern programming language such as C, C++, Java, or Perl - Experience programming with at least one modern language such as C++, C#, Java, Python, Golang, PowerShell, Ruby - Experience tools for automation (building, testing, releasing or monitoring)
+--------------------------------------------------------------------------
+#016 | [Amazon] Software Dev Engineer (TEMP)  (Match: 56%)
+  Source   : Amazon
+  Location : IN, TN, Chennai
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/10477224/software-dev-engineer-temp
+  Quals    : - Are enrolled in a Bachelor's degree in Computer Science, Computer Engineering, or related fields at time of application - • Familiarity with the syntax of languages such as Java, C/C++ or Python. • Knowledge of Computer Science fundamentals such as object-oriented design, algorithm design, data st
+--------------------------------------------------------------------------
+#017 | [Amazon] Project Engineer, OPSENG  (Match: 48%)
+  Source   : Amazon
+  Location : IN, HR, Gurugram
+  Exp      : No experience requirement detected — assumed entry-level
+  URL      : https://www.amazon.jobs/en/jobs/3178608/project-engineer-opseng
+  Quals    : - Bachelor's degree in Mechanical Engineering, Electrical Engineering, Construction Management or an equivalent engineering science
 --------------------------------------------------------------------------
