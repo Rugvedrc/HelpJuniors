@@ -42,6 +42,7 @@ def init_db(reset: bool = False):
         sub_category TEXT,
         active_status TEXT,
         eligibility_status INTEGER,
+        stretch_eligible INTEGER DEFAULT 0,
         rejection_reason TEXT,
         relevance_score REAL,
         confidence_score REAL,
@@ -100,6 +101,7 @@ def save_jobs_to_db(jobs: List[Job]):
             "sub_category": j.sub_category,
             "active_status": j.active_status,
             "eligibility_status": 1 if j.eligibility_status else 0,
+            "stretch_eligible": 1 if j.stretch_eligible else 0,
             "rejection_reason": j.rejection_reason,
             "relevance_score": j.relevance_score,
             "confidence_score": j.confidence_score,
@@ -119,19 +121,26 @@ def save_jobs_to_db(jobs: List[Job]):
     conn.close()
 
 def get_eligible_jobs_from_db() -> pd.DataFrame:
+    """Returns fully eligible jobs (excludes stretch roles)."""
     init_db()
     conn = sqlite3.connect(DB_FILE)
-    df = pd.read_sql_query("SELECT * FROM jobs WHERE eligibility_status = 1 ORDER BY relevance_score DESC", conn)
+    df = pd.read_sql_query(
+        "SELECT * FROM jobs WHERE eligibility_status = 1 AND (stretch_eligible = 0 OR stretch_eligible IS NULL) ORDER BY relevance_score DESC",
+        conn
+    )
     conn.close()
     return df
 
 def get_unread_eligible_jobs(chat_id: int) -> pd.DataFrame:
+    """Returns unread fully eligible jobs (excludes stretch roles)."""
     init_db()
     conn = sqlite3.connect(DB_FILE)
     query = """
         SELECT j.* FROM jobs j
         LEFT JOIN job_reads r ON j.source_job_id = r.source_job_id AND r.chat_id = ?
-        WHERE j.eligibility_status = 1 AND r.source_job_id IS NULL
+        WHERE j.eligibility_status = 1
+          AND (j.stretch_eligible = 0 OR j.stretch_eligible IS NULL)
+          AND r.source_job_id IS NULL
         ORDER BY j.relevance_score DESC
     """
     df = pd.read_sql_query(query, conn, params=(chat_id,))
@@ -163,5 +172,30 @@ def get_rejected_jobs_from_db() -> pd.DataFrame:
     init_db()
     conn = sqlite3.connect(DB_FILE)
     df = pd.read_sql_query("SELECT * FROM jobs WHERE eligibility_status = 0 ORDER BY discovered_at DESC", conn)
+    conn.close()
+    return df
+
+def get_stretch_jobs_from_db() -> pd.DataFrame:
+    """Returns all stretch roles (1-2 yrs preferred, 0 required)."""
+    init_db()
+    conn = sqlite3.connect(DB_FILE)
+    df = pd.read_sql_query(
+        "SELECT * FROM jobs WHERE eligibility_status = 1 AND stretch_eligible = 1 ORDER BY relevance_score DESC",
+        conn
+    )
+    conn.close()
+    return df
+
+def get_unread_stretch_jobs(chat_id: int) -> pd.DataFrame:
+    """Returns unread stretch roles for a given chat."""
+    init_db()
+    conn = sqlite3.connect(DB_FILE)
+    query = """
+        SELECT j.* FROM jobs j
+        LEFT JOIN job_reads r ON j.source_job_id = r.source_job_id AND r.chat_id = ?
+        WHERE j.eligibility_status = 1 AND j.stretch_eligible = 1 AND r.source_job_id IS NULL
+        ORDER BY j.relevance_score DESC
+    """
+    df = pd.read_sql_query(query, conn, params=(chat_id,))
     conn.close()
     return df

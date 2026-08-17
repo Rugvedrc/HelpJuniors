@@ -14,7 +14,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from db.database import (
     DB_FILE, init_db, get_eligible_jobs_from_db,
-    get_unread_eligible_jobs, mark_all_jobs_read
+    get_unread_eligible_jobs, mark_all_jobs_read,
+    get_stretch_jobs_from_db, get_unread_stretch_jobs
 )
 
 TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/{method}"
@@ -43,7 +44,7 @@ def get_reply_keyboard() -> dict:
     return {
         "keyboard": [
             [{"text": "🔍 New / Unread Jobs"}, {"text": "📋 All Eligible Jobs"}],
-            [{"text": "✅ Mark All as Read"}]
+            [{"text": "⚡ Stretch Roles"}, {"text": "✅ Mark All as Read"}]
         ],
         "resize_keyboard": True,
         "is_persistent": True
@@ -81,6 +82,36 @@ def format_jobs_message(df: pd.DataFrame, title_suffix: str = "") -> str:
         )
 
     lines.append("\n_All listings verified 100% hard eligible (No PhD req, No 1+ YOE req, Product Tech, India)_")
+    return "\n".join(lines)
+
+
+def format_stretch_jobs_message(df) -> str:
+    """Format stretch roles (1-2 yrs preferred, 0 required) into a separate Telegram message."""
+    if df is None or df.empty:
+        return ""  # Return empty string — don't send if no stretch jobs
+
+    lines = [
+        f"⚡ *STRETCH ROLES — YOU MIGHT QUALIFY*\n",
+        f"_{len(df)} roles where 1-2 years is PREFERRED (not required). Zero mandatory barrier — apply anyway._\n"
+    ]
+
+    for idx, row in df.iterrows():
+        comp = row.get("company", "Company")
+        title = row.get("title", "Role")
+        loc = row.get("location") or row.get("city") or "India"
+        exp = str(row.get("experience_text", "1-2 yrs preferred"))[:60]
+        url = row.get("canonical_url") or row.get("apply_url") or "#"
+        score = row.get("relevance_score", 0)
+
+        lines.append(
+            f"*{idx + 1}. [{comp}] {title}*\n"
+            f"📍 *Location:* {loc}\n"
+            f"🎓 *Exp Note:* {exp}\n"
+            f"🎯 *Match:* {score:.0f}%\n"
+            f"🚀 [Apply Now]({url})\n"
+        )
+
+    lines.append("\n_These are stretch roles. The 0 years hard requirement means you CAN apply._")
     return "\n".join(lines)
 
 
@@ -129,6 +160,15 @@ def handle_update(token: str, update: dict):
             )
             send_message(token, chat_id, msg)
 
+        elif "stretch" in text_lower:
+            # ⚡ Stretch Roles button handler
+            stretch_df = get_stretch_jobs_from_db()
+            stretch_text = format_stretch_jobs_message(stretch_df)
+            if stretch_text:
+                send_message(token, chat_id, stretch_text)
+            else:
+                send_message(token, chat_id, "⚡ No stretch roles found yet. Run the pipeline first.")
+
         elif "all" in text_lower and "unread" not in text_lower and "new" not in text_lower:
             # "📋 All Eligible Jobs": Returns all eligible jobs in DB regardless of read status
             all_df = get_eligible_jobs_from_db()
@@ -145,8 +185,14 @@ def handle_update(token: str, update: dict):
             else:
                 response_text = format_jobs_message(unread_df, title_suffix="Unread Matching Jobs")
 
-            # Send EXACTLY ONE message containing matching jobs & predefined keyboard
+            # Send main eligible jobs
             send_message(token, chat_id, response_text)
+
+            # Auto-send stretch roles as a separate follow-up message
+            unread_stretch_df = get_unread_stretch_jobs(chat_id)
+            stretch_text = format_stretch_jobs_message(unread_stretch_df)
+            if stretch_text:
+                send_message(token, chat_id, stretch_text)
 
     # Handle inline button callbacks if any
     elif "callback_query" in update:

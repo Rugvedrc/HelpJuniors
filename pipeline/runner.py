@@ -41,6 +41,7 @@ def run_job_discovery_pipeline():
     # ── STAGE 3: HARD ELIGIBILITY ─────────────────────────────────────────
     print(f"\nSTAGE 3 — Hard Eligibility Pipeline ({len(unique_jobs)} unique jobs)")
     eligible_jobs = []
+    stretch_jobs = []
     all_processed = []
 
     rej_by_reason = defaultdict(int)
@@ -72,18 +73,26 @@ def run_job_discovery_pipeline():
             tracker.log_rejection(job.source_job_id, job.company, job.title, reason, cat)
             rej_by_reason[cat] += 1
         else:
-            # ── STAGE 4: RANKING (eligible only) ─────────────────────────
+            # ── STAGE 4: RANKING (eligible only) ────────────────────────────────────────
             job.relevance_score = calculate_relevance_score(job, profile)
-            eligible_jobs.append(job)
+            # Mark stretch roles (1-2 yrs preferred, 0 required)
+            if res.experience_analysis and res.experience_analysis.is_stretch:
+                job.stretch_eligible = True
+                stretch_jobs.append(job)
+            else:
+                eligible_jobs.append(job)
 
         all_processed.append(job)
 
     eligible_jobs.sort(key=lambda x: x.relevance_score, reverse=True)
+    stretch_jobs.sort(key=lambda x: x.relevance_score, reverse=True)
     tracker.stats["final_eligible_jobs"] = len(eligible_jobs)
+    tracker.stats["final_stretch_jobs"] = len(stretch_jobs)
 
-    # ── STAGE 5: PERSIST ALL (no limit) ──────────────────────────────────
-    print(f"\nSTAGE 4 — Persisting ALL {len(all_processed)} records to SQLite (no limit)")
-    save_jobs_to_db(all_processed)
+    # ── STAGE 5: PERSIST ALL (no limit) ────────────────────────────────────────────
+    all_to_save = all_processed  # includes both eligible, stretch, and rejected
+    print(f"\nSTAGE 4 — Persisting ALL {len(all_to_save)} records to SQLite (no limit)")
+    save_jobs_to_db(all_to_save)
 
     # ── FINAL DISTRIBUTION ────────────────────────────────────────────────
     company_dist = defaultdict(int)
@@ -108,6 +117,7 @@ def run_job_discovery_pipeline():
     print(f"    Experience mismatch           : {rej_by_reason['experience']}")
     print(f"    Other                         : {rej_by_reason['other']}")
     print(f"\n  FINAL ELIGIBLE JOBS: {len(eligible_jobs)}")
+    print(f"  STRETCH ROLES (1-2 yrs preferred): {len(stretch_jobs)}")
     if company_dist:
         print(f"\n  FINAL DISTRIBUTION BY COMPANY:")
         for company, cnt in sorted(company_dist.items(), key=lambda x: -x[1])[:20]:

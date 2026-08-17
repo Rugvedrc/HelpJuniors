@@ -8,6 +8,7 @@ class ExperienceAnalysis(BaseModel):
     preferred_experience_years: Optional[float] = None
     is_new_grad: bool = False
     is_intern: bool = False
+    is_stretch: bool = False  # True = 1-2 yrs preferred (not required) — eligible but shown separately
     confidence: float = 1.0
     reason: str = ""
 

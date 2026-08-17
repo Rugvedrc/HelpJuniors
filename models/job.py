@@ -54,3 +54,4 @@ class Job(BaseModel):
 
     relevance_score: float = 0.0
     confidence_score: float = 1.0
+    stretch_eligible: bool = False  # True = 1-2 yrs preferred (not required) — shown separately

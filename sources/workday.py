@@ -81,7 +81,7 @@ class WorkdayAdapter(SourceAdapter):
                     all_company_jobs.append(p)
                 offset += limit
                 total = data.get("total", 0)
-                if offset >= total or offset >= 200:  # Safety cap per company
+                if offset >= total or offset >= 1000:  # Full pagination
                     break
             except Exception as e:
                 print(f"    [Workday Careers] {company}: Error — {e}")

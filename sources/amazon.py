@@ -43,7 +43,7 @@ class AmazonAdapter(SourceAdapter):
                     if job_id:
                         matched[job_id] = j
                 offset += limit
-                if offset >= data.get("hits", 0) or offset >= 50:
+                if offset >= data.get("hits", 0) or offset >= 2000:  # Full pagination
                     break
             except Exception:
                 break

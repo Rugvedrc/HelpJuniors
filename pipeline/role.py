@@ -25,6 +25,25 @@ CAT_A_KEYWORDS = [
     "developer experience engineer", "developer productivity",
     "production engineer", "technical solutions engineer",
     "platform developer", "technical engineer",
+    # Finance/Investment Bank SWE titles (Goldman Sachs, JP Morgan, Morgan Stanley)
+    "technology analyst", "technology associate", "analyst - technology",
+    "analyst – technology", "analyst, technology", "engineering analyst",
+    "technology analyst program",
+    # Member of Technical Staff (Atlassian, Salesforce, Oracle, Databricks)
+    "member of technical staff", "mts i", "mts 1",
+    # Numbered junior variants
+    "software engineer i", "software engineer 1",
+    "engineer i", "developer i",
+    # Graduate / Trainee titles (Cisco, Siemens, Honeywell India)
+    "graduate engineer trainee", "engineer trainee", "technical trainee",
+    "get ",  # GET = Graduate Engineer Trainee — note trailing space to avoid substring match
+    "analyst programmer", "programmer analyst",
+    # Other common junior titles
+    "entry level engineer", "entry level developer", "entry level software",
+    "junior software developer", "fresher software engineer",
+    "software engineer new grad", "new grad engineer",
+    # Walmart Global Tech specific
+    "software development engineer i", "sde-i", "sde i ",
 ]
 
 # =============================================================================
@@ -43,6 +62,11 @@ CAT_B_KEYWORDS = [
     "conversational ai", "dialogue systems", "speech engineer",
     "multimodal", "rlhf", "fine-tuning engineer", "prompt engineer",
     "ai automation engineer", "automation ai",
+    # GenAI / RAG / Agentic AI
+    "generative ai", "large language model", "agentic ai", "ai agent",
+    "ai application engineer", "ai platform developer", "genai developer",
+    "rag engineer", "vector database engineer", "ai backend engineer",
+    "ml applications engineer", "ai solutions developer",
 ]
 
 # =============================================================================
@@ -56,6 +80,7 @@ CAT_C_KEYWORDS = [
     "data platform engineer", "data infrastructure engineer",
     "data pipeline engineer", "etl engineer", "big data engineer",
     "data developer", "data analyst engineer",
+    "junior data analyst", "associate data analyst", "data operations engineer",
 ]
 
 # =============================================================================
@@ -73,6 +98,10 @@ CAT_D_KEYWORDS = [
     "developer infrastructure engineer", "build engineer", "release engineer",
     "devsecops", "cloud architect", "systems reliability",
     "observability engineer", "monitoring engineer",
+    "azure engineer", "aws engineer", "gcp engineer",
+    "cloud infrastructure developer", "infrastructure developer",
+    "platform reliability engineer", "mlops engineer", "ml ops engineer",
+    "aiops engineer", "ai ops engineer",
 ]
 
 # =============================================================================
@@ -107,6 +136,13 @@ CAT_G_KEYWORDS = [
     "robotics software engineer", "embedded software",
     "firmware engineer", "compiler engineer",
     "distributed systems engineer",
+    # Finance/Quant tech roles
+    "quant developer", "quantitative developer", "quantitative engineer",
+    "algo engineer", "algorithmic engineer", "quant software engineer",
+    "systematic developer", "quant research engineer",
+    # Technical but adjacent
+    "technical analyst",  # NOT financial analyst — tech context
+    "software consultant",
 ]
 
 ALL_CATEGORIES = {
@@ -180,7 +216,8 @@ NON_TECH_TITLE_REJECT = [
 SENIORITY_TITLE_PATTERNS = [
     r'\bsenior\b', r'\bsr\.?\b', r'\blead\b', r'\bprincipal\b', r'\bstaff\b',
     r'\bmanager\b', r'\bdirector\b', r'\barchitect\b', r'\bhead\b',
-    r'\b(sde|software\s+engineer|system\s+development\s+engineer|systems\s+development\s+engineer|site\s+reliability\s+engineer|sre|test|developer|engineer|scientist|data\s+engineer|ml\s+engineer|ai\s+engineer)[\s\-]+(ii|iii|iv|2|3|4)\b',
+    # Only reject III, IV, 3, 4+ numbered levels — NOT II/2 (used for junior at many companies)
+    r'\b(sde|software\s+engineer|system\s+development\s+engineer|systems\s+development\s+engineer|site\s+reliability\s+engineer|sre|test|developer|engineer|scientist|data\s+engineer|ml\s+engineer|ai\s+engineer)[\s\-]+(iii|iv|3|4)\b',
     r'\bmts\s*[-\s]',  # MTS - prefix = Member of Technical Staff prefix (senior)
 ]
 
@@ -188,6 +225,11 @@ SENIORITY_TITLE_PATTERNS = [
 SENIORITY_EXEMPT_PATTERNS = [
     r'\bnew\s+grad\b', r'\bentry[\s\-]level\b', r'\bfresh(er)?\b',
     r'\b2026\b', r'\bgraduate\b', r'\bintern\b',
+    # Numbered level I / 1 = junior at most companies (SDE I, Engineer I, Software Engineer 1)
+    r'\bengineer\s+i\b', r'\bsde\s+i\b', r'\bsde\s+1\b',
+    r'\bsoftware\s+engineer\s+i\b', r'\bsoftware\s+engineer\s+1\b',
+    r'\bdeveloper\s+i\b', r'\bdeveloper\s+1\b',
+    r'\bmts\s+i\b', r'\bmts\s+1\b',
 ]
 
 
@@ -233,12 +275,17 @@ def classify_role(title: str, category: str = "", description: str = "") -> Tupl
             if kw in full_text:
                 return True, cat_name, kw.title(), f"Matched '{kw}' in {cat_name}"
 
-    # --- 4. Broad fallback: if title contains 'engineer' or 'developer' or 'scientist'
-    #        AND is not non-tech → tentatively accept for further scoring
-    if re.search(r'\b(engineer|developer|scientist|analyst)\b', title_lower):
-        # But not if it's a clearly non-SW engineer
+    # --- 4. Broad fallback: 'engineer' or 'developer' or 'scientist' ONLY
+    #        Removed 'analyst' — too noisy (Financial Analyst, Business Analyst slip through)
+    if re.search(r'\b(engineer|developer|scientist)\b', title_lower):
+        # But not if it's a clearly non-SW domain
         non_sw_domains = r'\b(civil|mechanical|electrical|chemical|biomedical|manufacturing|process|structural|aerospace|environmental)\b'
         if not re.search(non_sw_domains, title_lower):
             return True, "Software Engineering", "Engineering", f"Broad engineering title match: {title}"
+
+    # --- 5. Narrow analyst fallback: ONLY technology/technical/systems analyst passes
+    #        (these are already in CAT_A_KEYWORDS but catches capitalization variants)
+    if re.search(r'\b(technology|technical|software|systems)\s+analyst\b', title_lower):
+        return True, "Software Engineering", "Technology Analyst", f"Technology analyst title match: {title}"
 
     return False, "Other", "Other", f"Role '{title}' does not match any target engineering domain"

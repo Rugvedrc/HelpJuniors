@@ -202,6 +202,7 @@ def analyze_experience_requirement(jd_text: str, title: str = "") -> ExperienceA
 
     # Case C: only preferred, no mandatory
     if mandatory_min == 0.0 and preferred_years is not None:
+        is_stretch_role = preferred_years >= 1.0  # 1+ yrs preferred = stretch
         return ExperienceAnalysis(
             min_required_experience_years=0.0,
             max_required_experience_years=1.0,
@@ -209,6 +210,7 @@ def analyze_experience_requirement(jd_text: str, title: str = "") -> ExperienceA
             preferred_experience_years=preferred_years,
             is_new_grad=True,
             is_intern=False,
+            is_stretch=is_stretch_role,
             confidence=0.90,
             reason=f"{preferred_years}+ years preferred only — 0 years minimum required"
         )

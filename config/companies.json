@@ -104,13 +104,29 @@
     {"token": "netapp", "company": "NetApp"},
     {"token": "veritas", "company": "Veritas"},
     {"token": "honeywell", "company": "Honeywell"},
-    {"token": "siemens", "company": "Siemens Technology"}
+    {"token": "siemens", "company": "Siemens Technology"},
+    {"token": "zomato", "company": "Zomato"},
+    {"token": "zepto", "company": "Zepto"},
+    {"token": "rapido", "company": "Rapido"},
+    {"token": "moengage", "company": "MoEngage"},
+    {"token": "appsflyer", "company": "AppsFlyer"},
+    {"token": "smallcase", "company": "Smallcase"},
+    {"token": "visa", "company": "Visa"},
+    {"token": "paypal", "company": "PayPal"},
+    {"token": "americanexpress", "company": "American Express"},
+    {"token": "walmartglobaltech", "company": "Walmart Global Tech"}
   ],
   "lever_slugs": [
     {"slug": "meesho", "company": "Meesho"},
     {"slug": "cred", "company": "CRED"},
     {"slug": "paytm", "company": "Paytm"},
-    {"slug": "fi", "company": "FI Money"}
+    {"slug": "fi", "company": "FI Money"},
+    {"slug": "zomato", "company": "Zomato"},
+    {"slug": "ola", "company": "Ola"},
+    {"slug": "rapido", "company": "Rapido"},
+    {"slug": "nykaa", "company": "Nykaa"},
+    {"slug": "dream11", "company": "Dream11"},
+    {"slug": "mpl", "company": "MPL"}
   ],
   "ashby_slugs": [
     {"slug": "sarvam", "company": "Sarvam AI"},
@@ -120,7 +136,12 @@
     {"slug": "mudrex", "company": "Mudrex"},
     {"slug": "fi-money", "company": "FI Money"},
     {"slug": "open", "company": "Open Financial"},
-    {"slug": "niyofinancial", "company": "NiYO"}
+    {"slug": "niyofinancial", "company": "NiYO"},
+    {"slug": "zepto", "company": "Zepto"},
+    {"slug": "slice", "company": "Slice"},
+    {"slug": "jupiter", "company": "Jupiter"},
+    {"slug": "cashfree", "company": "Cashfree Payments"},
+    {"slug": "zetabits", "company": "Zeta"}
   ],
   "workday_sites": [
     {"company": "Adobe", "host": "adobe.wd5.myworkdayjobs.com", "board": "external_experienced"},
@@ -128,6 +149,15 @@
     {"company": "Salesforce", "host": "salesforce.wd12.myworkdayjobs.com", "board": "External_Career_Site"},
     {"company": "Target", "host": "target.wd5.myworkdayjobs.com", "board": "targetcareers"},
     {"company": "Autodesk", "host": "autodesk.wd1.myworkdayjobs.com", "board": "Ext"},
-    {"company": "Workday", "host": "workday.wd5.myworkdayjobs.com", "board": "Workday"}
+    {"company": "Workday", "host": "workday.wd5.myworkdayjobs.com", "board": "Workday"},
+    {"company": "Flipkart", "host": "flipkart.wd3.myworkdayjobs.com", "board": "Flipkart"},
+    {"company": "Walmart Global Tech", "host": "walmart.wd5.myworkdayjobs.com", "board": "WalmartExternalCareerSite"},
+    {"company": "Cisco", "host": "cisco.wd5.myworkdayjobs.com", "board": "Cisco-University-US"},
+    {"company": "Qualcomm", "host": "qualcomm.wd5.myworkdayjobs.com", "board": "qualcomm_university"},
+    {"company": "Intel", "host": "intel.wd1.myworkdayjobs.com", "board": "External"},
+    {"company": "IBM", "host": "ibm.wd12.myworkdayjobs.com", "board": "External_Career_Site"},
+    {"company": "SAP", "host": "sap.wd3.myworkdayjobs.com", "board": "SAPexternalCareerSite"},
+    {"company": "Oracle", "host": "oracle.wd1.myworkdayjobs.com", "board": "External_Career_Site_US"},
+    {"company": "Uber", "host": "uber.wd5.myworkdayjobs.com", "board": "Uber-FTE"}
   ]
 }
