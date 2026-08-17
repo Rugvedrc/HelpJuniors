@@ -127,13 +127,30 @@ def start_background_telegram_daemon():
         t.start()
         print("🤖 Background Telegram Bot Listener active on Streamlit Cloud!")
 
-    # Start keep-alive pinger so Streamlit Cloud never sleeps
+    # Start keep-alive pinger so Streamlit Cloud never sleeps between GitHub Actions pings
     app_url = _get_app_url()
     if app_url:
         ka = threading.Thread(target=_keep_alive_pinger, args=(app_url,), daemon=True)
         ka.start()
     else:
-        print("ℹ️  STREAMLIT_APP_URL not set — keep-alive pinger disabled (add it to Streamlit secrets).")
+        print("ℹ️  STREAMLIT_APP_URL not set — keep-alive pinger disabled.")
+
+    # Auto-run pipeline on startup + every 12 hours so DB is always populated
+    def _auto_pipeline_runner():
+        time.sleep(10)  # Wait 10s for Streamlit to fully boot
+        while True:
+            try:
+                print("⚙️  Auto-pipeline: starting job discovery...")
+                from pipeline.runner import run_job_discovery_pipeline
+                run_job_discovery_pipeline()
+                print("✅ Auto-pipeline: complete.")
+            except Exception as e:
+                print(f"⚠️  Auto-pipeline error: {e}")
+            time.sleep(12 * 3600)  # Run again every 12 hours
+
+    pipeline_thread = threading.Thread(target=_auto_pipeline_runner, daemon=True)
+    pipeline_thread.start()
+    print("⚙️  Auto-pipeline thread started (runs 10s after boot, then every 12h)")
 
 
 def main():

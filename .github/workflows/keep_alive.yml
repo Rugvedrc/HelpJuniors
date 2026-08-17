@@ -1,0 +1,19 @@
+name: Keep Streamlit App Alive
+
+on:
+  schedule:
+    # Runs every 5 minutes — keeps the Streamlit app awake so the Telegram bot never dies
+    - cron: '*/5 * * * *'
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Streamlit App
+        run: |
+          echo "Pinging https://huntjob.streamlit.app to keep it awake..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://huntjob.streamlit.app)
+          echo "Response: $HTTP_STATUS"
+          echo "Ping complete at $(date)"
