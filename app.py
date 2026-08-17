@@ -1,5 +1,8 @@
 import os
 import sqlite3
+import threading
+import time
+import requests
 from datetime import datetime
 
 import streamlit as st
@@ -89,15 +92,48 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color:
 """, unsafe_allow_html=True)
 
 
+def _get_app_url() -> str:
+    """Get the Streamlit app's public URL for self-pinging keep-alive."""
+    # First try env var, then Streamlit secrets
+    url = os.environ.get("STREAMLIT_APP_URL", "").strip()
+    if not url:
+        try:
+            url = st.secrets.get("STREAMLIT_APP_URL", "").strip()
+        except Exception:
+            pass
+    return url
+
+
+def _keep_alive_pinger(app_url: str, interval_seconds: int = 600):
+    """Background thread: pings our own Streamlit URL every `interval_seconds`
+    so Streamlit Cloud never puts the app to sleep (and kills the bot thread)."""
+    print(f"⏰ Keep-alive pinger started — will ping {app_url} every {interval_seconds}s")
+    while True:
+        time.sleep(interval_seconds)
+        try:
+            res = requests.get(app_url, timeout=15)
+            print(f"✅ Keep-alive ping OK ({res.status_code}) at {datetime.now().strftime('%H:%M:%S')}")
+        except Exception as e:
+            print(f"⚠️  Keep-alive ping failed: {e}")
+
+
 @st.cache_resource
 def start_background_telegram_daemon():
+    from telegram_bot import run_telegram_bot_polling
+
     token = get_telegram_token()
     if token:
-        import threading
-        from telegram_bot import run_telegram_bot_polling
         t = threading.Thread(target=run_telegram_bot_polling, args=(token,), daemon=True)
         t.start()
         print("🤖 Background Telegram Bot Listener active on Streamlit Cloud!")
+
+    # Start keep-alive pinger so Streamlit Cloud never sleeps
+    app_url = _get_app_url()
+    if app_url:
+        ka = threading.Thread(target=_keep_alive_pinger, args=(app_url,), daemon=True)
+        ka.start()
+    else:
+        print("ℹ️  STREAMLIT_APP_URL not set — keep-alive pinger disabled (add it to Streamlit secrets).")
 
 
 def main():
