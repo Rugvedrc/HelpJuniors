@@ -110,7 +110,17 @@ class WorkdayAdapter(SourceAdapter):
         canonical_url = f"https://{host}{job_path}" if job_path and host else ""
 
         bullet_fields = j.get("bulletFields", [])
-        location = bullet_fields[0] if bullet_fields else "India"
+        location = j.get("locationsText", "")
+        if not location and bullet_fields:
+            # Skip fields that look like requisition IDs (e.g. R170433, JR0285646)
+            import re
+            for bf in bullet_fields:
+                if not re.match(r'^[A-Za-z]{1,4}\d{4,10}$', bf.strip()):
+                    location = bf
+                    break
+        if not location or re.match(r'^[A-Za-z]{1,4}\d{4,10}$', location.strip()):
+            location = "India"
+
         city = location.split(",")[0].strip() if "," in location else location
 
         title = j.get("title", "").strip()
