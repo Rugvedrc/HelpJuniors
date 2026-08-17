@@ -150,7 +150,6 @@ ALL_CATEGORIES = {
     "AI/ML Engineering": CAT_B_KEYWORDS,
     "Data Engineering": CAT_C_KEYWORDS,
     "Cloud/DevOps/Infrastructure": CAT_D_KEYWORDS,
-    "QA/SDET": CAT_E_KEYWORDS,
     "Security Engineering": CAT_F_KEYWORDS,
     "Adjacent Engineering": CAT_G_KEYWORDS,
 }
@@ -245,16 +244,21 @@ def classify_role(title: str, category: str = "", description: str = "") -> Tupl
     full_text = f"{title_lower} {category.lower()} {description.lower()[:500]}"
 
     # --- 1. Hard non-tech title rejection ---
-    # Roles that are strictly non-target (even if they contain 'engineer' or 'developer')
+    # Roles that are strictly non-target (support, QA, testing, voice, call center, sales, etc.)
     STRICT_NON_DEV_PATTERNS = [
         r'\bgtm\b', r'\bsales\s+engineer\b', r'\bmarketing\s+engineer\b',
         r'\btechnical\s+marketing\b', r'\bgrowth\s+engineer\b', r'\bsps\s+associate\b',
         r'\bsolutions\s+architect\b', r'\bpresales\b', r'\bproduct\s+analyst\b',
-        r'\bassistant\s+manager\b', r'\bengagement\s+manager\b', r'\bmanagement\s+consultant\b'
+        r'\bassistant\s+manager\b', r'\bengagement\s+manager\b', r'\bmanagement\s+consultant\b',
+        # Strict rejection for support, QA, testing, SDET, voice, call center, helpdesk, moderator
+        r'\bsupport\b', r'\bhelpdesk\b', r'\bservice\s+desk\b', r'\bdesktop\s+support\b',
+        r'\bqa\b', r'\bquality\b', r'\btesting\b', r'\btester\b', r'\btest\b', r'\bsdet\b',
+        r'\bin\s+test\b', r'\bcontent\s+moderator\b', r'\bmoderation\b', r'\bvoice\b',
+        r'\bcall\s+center\b', r'\btelecaller\b', r'\bcustomer\s+service\b'
     ]
     for pat in STRICT_NON_DEV_PATTERNS:
         if re.search(pat, title_lower, re.IGNORECASE):
-            return False, "Non-Tech", "Non-Tech", f"Strict Non-Dev/Non-Tech role: {title}"
+            return False, "Non-Tech/Support", "Excluded Category", f"Strict Non-Dev/Support/QA/Testing role rejected: {title}"
 
     for pat in NON_TECH_TITLE_REJECT:
         if re.search(pat, title_lower, re.IGNORECASE):
