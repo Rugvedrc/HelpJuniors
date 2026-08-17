@@ -37,7 +37,7 @@
     "Mamaearth", "Minimalist", "Boat", "boAt", "Noise",
     "Agoda", "MakeMyTrip", "Cleartrip", "EaseMyTrip", "Yatra",
     "OYO", "Zostel", "Treebo", "Fabhotels",
-    "Zeta", "Epsilon", "Jio Platforms", "Reliance Jio",
+    "Zeta", "Epsilon", "Jio Platforms", "Reliance Jio", "JioStar", "Jio Star", "JioHotstar", "Hotstar",
     "Siemens", "Siemens Technology", "ABB", "Honeywell", "Bosch", "Bosch Global Software",
     "Samsung Research", "Samsung India", "LG Electronics",
     "Ericsson", "Nokia", "Akamai"
@@ -159,6 +159,7 @@
     {"company": "IBM", "host": "ibm.wd12.myworkdayjobs.com", "board": "External_Career_Site"},
     {"company": "SAP", "host": "sap.wd3.myworkdayjobs.com", "board": "SAPexternalCareerSite"},
     {"company": "Oracle", "host": "oracle.wd1.myworkdayjobs.com", "board": "External_Career_Site_US"},
-    {"company": "Uber", "host": "uber.wd5.myworkdayjobs.com", "board": "Uber-FTE"}
+    {"company": "Uber", "host": "uber.wd5.myworkdayjobs.com", "board": "Uber-FTE"},
+    {"company": "JioStar", "host": "jiostar.wd102.myworkdayjobs.com", "board": "JioStar"}
   ]
 }
